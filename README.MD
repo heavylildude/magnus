@@ -44,6 +44,7 @@ This is why **`heavylildude/magnus-supernova`** is the recommended model. It's a
 ## 🔥 Features That Rip
 
 * **🤖 Universal Web Search**: Grants real-time web access to LLMs **with or without** native tool-calling abilities through our client-side heuristic triggers.
+* **🤖 API or Non-API Web Search**: Do your websearch **with or without** search API (google/brave search api).
 * **🌀 Advanced Agentic Loop**: A full request-execute-respond tool loop for fine-tuned models like `magnus-supernova`.
 * **👁️ Multi-Model Routing**: Seamlessly use one all-powerful model or configure two separate models (e.g., text and vision) and watch the CLI auto-switch between them.
 * **📂 Local File RAG**: Use `/load` to inject the content of any local file into the context window. Chat with your code, get doc summaries, or analyze logs.
@@ -110,3 +111,4 @@ Mastering the CLI is easy. Here are the core moves:
 
 
 Here's the breakdown of the codebase, straight up:
+
