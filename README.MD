@@ -23,7 +23,7 @@ This is the core of our innovation for base models. The CLI itself is smart enou
 
 For more advanced models, we can do even better. The default model, `heavylildude/magnus-supernova`, has been specifically fine-tuned to understand a simulated tool-calling syntax.
 
-* **How it Works**: The `SYSTEM_PROMPT` in `modules/state.js` teaches the model to respond with an XML block like `<tool_call><tool>search</tool><query>...</query></tool_call>` when it realizes its internal knowledge is stale. The `runAgenticLoop` in `modules/commands.js` is designed to catch this specific output.
+* **How it Works**: The `modules/state.js` manage the model to respond with an XML block like `<tool_call><tool>search</tool><query>...</query></tool_call>` when it realizes its internal knowledge is stale. The `runAgenticLoop` in `modules/commands.js` is designed to catch this specific output.
 * **The Loop**:
     1.  The LLM outputs the `<tool_call>` block.
     2.  The CLI intercepts this, preventing it from being shown to you.
@@ -111,4 +111,5 @@ Mastering the CLI is easy. Here are the core moves:
 
 
 Here's the breakdown of the codebase, straight up:
+
 
