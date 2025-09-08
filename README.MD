@@ -67,7 +67,7 @@ Getting set up is a no-brainer. Just follow the current.
 
 2.  **Clone the Repo**:
     ```bash
-    git clone <your-repo-url>
+    git clone https://github.com/heavylildude/magnus.git
     cd magnus
     ```
 
@@ -107,5 +107,6 @@ Mastering the CLI is easy. Here are the core moves:
 |  \`\`\`                   | Type three backticks to start and end multiline code input.                                    |
 
 ## 🗺️ The Blueprint (Project Structure)
+
 
 Here's the breakdown of the codebase, straight up:
