@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "@google/genai": "^1.30.0",
+    "better-sqlite3": "^12.4.1",
+    "cors": "^2.8.5",
+    "diff-match-patch": "^1.0.5",
+    "docx-preview": "^0.3.7",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "mammoth": "^1.11.0",
+    "multer": "^2.0.2",
+    "open": "^11.0.0",
+    "pdf2json": "^4.0.0",
+    "puppeteer": "^24.31.0",
+    "undici": "^7.16.0",
+    "xlsx": "^0.18.5"
+  },
+  "name": "magnus",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "heavylildude",
+  "license": "ISC",
+  "type": "commonjs"
+}

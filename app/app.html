@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="assets/icon/magnus.ico">
+    <title>Magnus Code Editor</title>
+
+    <link rel="stylesheet" href="assets/addon/codemirror.min.css">
+    <script src="assets/addon/codemirror.min.js"></script>
+
+    <link rel="stylesheet" href="assets/addon/dialog.min.css">
+    <script src="assets/addon/search.min.js"></script>
+    <script src="assets/addon/searchcursor.min.js"></script>
+    <script src="assets/addon/dialog.min.js"></script>
+    <script src="assets/addon/matchbrackets.min.js"></script>
+    <script src="assets/addon/closebrackets.min.js"></script>
+    <script src="assets/addon/active-line.min.js"></script>
+
+    <script src="assets/mode/xml.min.js"></script>
+    <script src="assets/mode/javascript.min.js"></script>
+    <script src="assets/mode/css.min.js"></script>
+    <script src="assets/mode/htmlmixed.min.js"></script>
+    <script src="assets/mode/clike.min.js"></script>
+    <script src="assets/mode/python.min.js"></script>
+    <script src="assets/mode/markdown.min.js"></script>
+    <script src="assets/mode/sql.min.js"></script>
+    <script src="assets/mode/php.min.js"></script>
+
+    <link rel="stylesheet" href="assets/theme/dracula.min.css">
+    <link rel="stylesheet" href="assets/app.css">
+    
+    <!-- docx-preview dependencies and library -->
+    <script src="https://unpkg.com/jszip@3/dist/jszip.min.js"></script>
+    <script src="https://unpkg.com/docx-preview/dist/docx-preview.min.js"></script>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="toolbar">
+        <button id="toggleExplorer" class="icon" title="Toggle Explorer" style="font-size: 16px; padding-top: 2px;">☰</button>
+        <button id="newFile">New&nbsp;File</button>
+        <button id="openFile">Open&nbsp;File</button>
+        <button id="openFolder">Open&nbsp;Folder</button>
+        <button id="saveFile" disabled>Save</button>
+        <button id="saveAllFiles">Save&nbsp;All</button>
+        <span id="focusedTabIndicator" style="margin-left: 52px;font-size: 13px;color: darkseagreen;top: -1px;position: relative;"><b>&#10043;</b> No&nbsp;file&nbsp;in&nbsp;focus</span>
+        <div style="flex: 1"></div>
+        <button id="toggleChat" class="icon" title="Toggle Chat">⌾</button>
+    </div>
+
+    <div class="main-layout">
+        <div class="file-explorer" id="fileExplorer">
+            <div class="explorer-header">
+                <span>PROJECT</span>
+            </div>
+            <div class="file-tree" id="fileTree">
+                <div style="padding: 20px; text-align: center; color: var(--text-secondary); font-size: 12px;">
+                    No folder opened
+                </div>
+            </div>
+        </div>
+
+        <div class="editor-area">
+            <div class="editor-tabs" id="editorTabs"></div>
+            <div class="editor-container">
+                <textarea id="editor"></textarea>
+                <div id="pdfViewer" style="display: none;"></div>
+                <div id="documentViewer" style="display: none;"></div>
+            </div>
+            <div class="status-bar">
+                <span id="statusLeft">Ready</span>
+                <span id="statusRight">Ln 1, Col 1</span>
+            </div>
+        </div>
+
+        <div class="chat-panel" id="chatPanel">
+            <div class="chat-header">
+                <div class="ollama-status">
+                    <span class="status-dot" id="ollamaStatusDot"></span>
+                    <span id="ollamaStatusText">Checking...</span>
+                </div>
+                <button class="icon" id="clearChat" title="Clear Chat">&orarr;</button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="placeholder" style="padding: 20px; text-align: center; color: var(--text-secondary); font-size: 12px;">
+                    Howya goin?
+                </div>
+            </div>
+            <div class="chat-input-area">
+                
+                <div style="display: flex; gap: 6px; align-items: center; margin-top: 8px; margin-bottom: 8px; flex-wrap: wrap;">
+                    <div id="contextTags" class="context-tags-container" style="flex: 1; margin: 0;"></div>
+                    <button id="addContextBtn" class="icon" title="Add Context Files" style="font-weight: bold; min-width: 36px; margin: 0;">&#10019;</button>
+                </div>
+                <div id="contextSearchContainer" style="position: relative; margin-bottom: 8px; display: none;">
+                    <input type="text" id="contextSearchInput" class="chat-input" placeholder="Search files..." style="margin: 0;">
+                    <div id="contextSearchDropdown" class="context-dropdown"></div>
+                </div>
+
+                <textarea id="chatInput" class="chat-input" placeholder="Jusk ask..." rows="8"></textarea>
+                <button id="sendChat" class="primary" style="width: 100%;">Send</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="assets/state.js"></script>
+<script src="assets/utils.js"></script>
+<script src="assets/ui.js"></script>
+<script src="assets/file-system.js"></script>
+<script src="assets/chat.js"></script>
+<script src="assets/chat-coding.js"></script>
+<script src="assets/chat-context.js"></script>
+<script src="assets/events.js"></script>
+<script src="assets/main.js"></script>
+
+</body>
+<div id="loadingOverlay">
+    <div class="loader-container">
+        <div class="spinner"></div>
+        <div class="loader-text">Loading...</div>
+    </div>
+</div>
+</html>

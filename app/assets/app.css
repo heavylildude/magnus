@@ -1,0 +1,1154 @@
+/* Terminal Nano Editor Skin for Magnus - Dracula Theme */
+:root {
+    --nano-bg: #282a36;
+    --nano-text: #f8f8f2;
+    --nano-text-dim: #6272a4;
+    --nano-highlight: #6f266e;
+    --nano-warning: #ff79c6;
+    --nano-success: #50fa7b;
+    --nano-border: #44475a;
+    --nano-accent: #ff79c6;
+    --nano-variable: #50fa7b;
+    --nano-number: #bd93f9;
+    --nano-operator: #ff79c6;
+    --nano-tag: #ff79c6;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Courier', monospace;
+    background: var(--nano-bg);
+    color: var(--nano-text);
+    height: 100vh;
+    overflow: hidden;
+    letter-spacing: 0.5px;
+}
+
+/* ============ MAIN CONTAINER ============ */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* ============ TOOLBAR / HEADER ============ */
+.toolbar {
+    background: var(--nano-bg);
+    border-bottom: 1px solid var(--nano-border);
+    padding: 6px 12px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-shrink: 0;
+    font-size: 12px;
+}
+
+#focusedTabIndicator {
+    margin-left: auto !important;
+    color: yellow !important;
+    font-size: 12px !important;
+    font-weight: normal !important;
+    margin-right: auto !important;
+    width: 75%;
+    text-align: center;
+}
+
+/* ============ MAIN LAYOUT ============ */
+.main-layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* ============ FILE EXPLORER ============ */
+.file-explorer {
+    width: 220px;
+    background: var(--nano-bg);
+    border-right: 1px solid var(--nano-border);
+    display: flex;
+    flex-direction: column;
+    transition: margin-left 0.3s;
+    font-size: 11px;
+}
+
+.file-explorer.collapsed {
+    margin-left: -220px;
+}
+
+.explorer-header {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--nano-border);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: yellow;
+    font-weight: bold;
+}
+
+.file-tree {
+    flex: 1;
+    overflow-y: auto;
+    padding: 4px 0;
+    overflow-x: scroll;
+}
+
+.tree-item {
+    padding: 2px 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    user-select: none;
+    color: var(--nano-text);
+}
+
+.tree-item:hover {
+    background: var(--nano-border);
+    color: white;
+}
+
+.tree-item.active {
+    background: var(--nano-highlight);
+    color: white;
+    font-weight: bold;
+}
+
+.tree-item.folder {
+    font-weight: bold;
+}
+
+.tree-item .icon {
+    width: 14px;
+    flex-shrink: 0;
+}
+
+.tree-item .name {
+    flex: 1;
+    text-overflow: clip;
+    white-space: nowrap;
+    font-family: monospace;
+}
+
+.tree-item .unsaved {
+    color: var(--nano-warning);
+    font-weight: bold;
+    margin-left: auto;
+}
+
+.tree-children {
+    margin-left: 12px;
+}
+
+.tree-children.collapsed {
+    display: none;
+}
+
+/* ============ EDITOR AREA ============ */
+.editor-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.editor-tabs {
+    background: var(--nano-bg);
+    border-bottom: 1px solid var(--nano-border);
+    display: flex;
+    overflow-x: auto;
+    flex-shrink: 0;
+    font-size: 11px;
+}
+
+.editor-tab {
+    padding: 4px 12px;
+    border-right: 1px solid var(--nano-border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    white-space: nowrap;
+    color: var(--nano-text);
+}
+
+.editor-tab:hover {
+    background: var(--nano-border);
+    color: var(--nano-bg);
+}
+
+.editor-tab.active {
+    background: yellow;
+    color: var(--nano-bg);
+    font-weight: bold;
+    border-bottom: none;
+}
+
+.editor-tab .close {
+    opacity: 0.7;
+    font-weight: bold;
+    margin-left: 4px;
+    cursor: pointer;
+}
+
+.editor-tab .close:hover {
+    opacity: 1;
+    color: var(--nano-warning);
+}
+
+.editor-container {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    background: var(--nano-bg);
+}
+
+/* ============ CODEMIRROR OVERRIDE ============ */
+.CodeMirror {
+    height: 100%;
+    font-size: 12px;
+    font-family: monospace !important;
+    background: var(--nano-bg) !important;
+    color: var(--nano-text) !important;
+}
+
+.CodeMirror-gutters {
+    background: var(--nano-bg) !important;
+    border-right: 1px solid var(--nano-border) !important;
+}
+
+.CodeMirror-linenumber {
+    color: var(--nano-text-dim) !important;
+    font-size: 11px;
+}
+
+
+
+.CodeMirror-selected {
+    background: var(--nano-highlight) !important;
+    color: var(--nano-bg) !important;
+}
+
+.CodeMirror-line::selection,
+.CodeMirror-line>span::selection,
+.CodeMirror-line>span>span::selection {
+    background: var(--nano-highlight) !important;
+    color: var(--nano-bg) !important;
+}
+
+.CodeMirror-matchingbracket {
+    color: var(--nano-highlight) !important;
+    font-weight: bold;
+}
+
+.CodeMirror-dialog {
+    background: var(--nano-bg) !important;
+    border: 1px solid var(--nano-border) !important;
+    color: var(--nano-text) !important;
+}
+
+.CodeMirror-dialog input {
+    background: var(--nano-bg) !important;
+    color: var(--nano-text) !important;
+    border: 1px solid var(--nano-border) !important;
+    padding: 2px 4px;
+    font-family: monospace;
+}
+
+.CodeMirror-dialog input:focus {
+    outline: none;
+    border-color: var(--nano-highlight) !important;
+}
+
+/* ============ STATUS BAR ============ */
+.status-bar {
+    background: var(--nano-bg);
+    border-top: 1px solid var(--nano-border);
+    padding: 4px 12px;
+    font-size: 11px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    color: var(--nano-text-dim);
+    font-family: monospace;
+}
+
+/* ============ CHAT PANEL ============ */
+.chat-panel {
+    width: 320px;
+    background: var(--nano-bg);
+    border-left: 1px solid var(--nano-border);
+    display: flex;
+    flex-direction: column;
+    transition: margin-right 0.3s;
+}
+
+.chat-panel.collapsed {
+    margin-right: -320px;
+}
+
+.chat-header {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--nano-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: yellow;
+}
+
+.ollama-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--nano-warning);
+    display: inline-block;
+}
+
+.status-dot.connected {
+    background: var(--nano-success);
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 11px;
+}
+
+.chat-message {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 11px;
+    line-height: 1.4;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: monospace;
+}
+
+.chat-message.user {
+    color: yellow;
+}
+
+.chat-message.assistant {
+    color: var(--nano-text);
+}
+
+.message-content {
+    padding: 0;
+    background: transparent;
+}
+
+/* ============ CODE SECTIONS ============ */
+.code-section {
+    background: var(--nano-bg);
+    border: 1px solid var(--nano-border);
+    margin: 6px 0;
+    overflow: hidden;
+    font-size: 10px;
+}
+
+.code-section-header {
+    background: var(--nano-bg);
+    padding: 6px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 1px solid var(--nano-border);
+    user-select: none;
+    color: var(--nano-highlight);
+    font-weight: bold;
+}
+
+.code-section-header:hover {
+    background: var(--nano-border);
+    color: var(--nano-bg);
+}
+
+.code-section-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+}
+
+.code-section-toggle {
+    font-size: 10px;
+    color: var(--nano-text-dim);
+}
+
+.code-section-toggle.collapsed {
+    transform: rotate(-90deg);
+}
+
+.code-section-file {
+    font-size: 11px;
+    font-family: monospace;
+    color: yellow;
+    font-weight: bold;
+}
+
+.code-section-lang {
+    font-size: 9px;
+    background: var(--nano-highlight);
+    color: var(--nano-bg);
+    padding: 1px 4px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.code-section-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.code-section-body.collapsed {
+    display: none;
+}
+
+.code-section-content {
+    padding: 8px;
+    background: var(--nano-bg);
+    color: var(--nano-success);
+    font-size: 10px;
+    line-height: 1.3;
+    max-height: 200px;
+    overflow-y: auto;
+    font-family: monospace;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    border-bottom: 1px solid var(--nano-border);
+}
+
+.code-section-content .diff-line.added {
+    color: var(--nano-success) !important;
+    padding-left: 2px;
+    border-left: 2px solid var(--nano-success);
+}
+
+.code-section-content .diff-line.removed {
+    color: var(--nano-warning) !important;
+    padding-left: 2px;
+    border-left: 2px solid var(--nano-warning);
+}
+
+.code-section-content .diff-line.hunk {
+    color: var(--nano-text-dim) !important;
+    font-weight: bold;
+}
+
+.code-section-actions {
+    display: flex;
+    gap: 4px;
+    padding: 6px 8px;
+    background: var(--nano-bg);
+    justify-content: flex-end;
+    border-top: 1px solid var(--nano-border);
+}
+
+/* ============ BUTTONS ============ */
+button {
+    background: var(--nano-bg);
+    border: none;
+    color: var(--nano-text);
+    padding: 3px 2px;
+    border-radius: 0;
+    cursor: pointer;
+    font-size: 10px;
+    font-family: monospace;
+    transition: all 0.1s;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+button:hover {
+    background: yellow;
+    color: var(--nano-bg);
+}
+
+button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+button.primary {
+    background: var(--nano-highlight);
+    color: white;
+    border-color: var(--nano-highlight);
+}
+
+button.primary:hover {
+    background: var(--nano-text);
+    border-color: var(--nano-text);
+    color: var(--nano-bg);
+}
+
+button.danger {
+    background: var(--nano-warning);
+    color: white;
+    border-color: var(--nano-warning);
+}
+
+button.small {
+    padding: 2px 6px;
+    font-size: 9px;
+}
+
+button.icon {
+    padding: 3px 6px;
+    font-size: 12px;
+    background: transparent;
+    border: none;
+}
+
+button.icon:hover {
+    background: var(--nano-border);
+}
+
+.code-btn {
+    padding: 4px 8px;
+    font-size: 9px;
+    border: 1px solid var(--nano-border);
+    border-radius: 0;
+    cursor: pointer;
+    background: var(--nano-bg);
+    color: var(--nano-text);
+    font-family: monospace;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.code-btn:hover {
+    background: var(--nano-border);
+    color: var(--nano-bg);
+}
+
+.code-btn.inject-btn {
+    background: var(--nano-success) !important;
+    color: var(--nano-bg) !important;
+    border-color: var(--nano-success);
+}
+
+.code-btn.close-btn {
+    background: var(--nano-warning) !important;
+    color: var(--nano-bg) !important;
+    border-color: var(--nano-warning);
+}
+
+/* ============ CHAT INPUT AREA ============ */
+.chat-input-area {
+    border-top: 1px solid var(--nano-border);
+    padding: 8px;
+    background: var(--nano-bg);
+}
+
+.chat-input {
+    width: 100%;
+    background: var(--nano-bg);
+    border: 1px solid var(--nano-border);
+    color: var(--nano-text);
+    padding: 4px 6px;
+    border-radius: 0;
+    font-size: 11px;
+    resize: vertical;
+    min-height: 40px;
+    font-family: monospace;
+}
+
+.chat-input:focus {
+    outline: none;
+    border-color: yellow;
+    box-shadow: inset 0 0 0 1px var(--nano-highlight);
+}
+
+/* ============ CONTEXT TAGS ============ */
+.context-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    min-height: 0;
+    align-items: center;
+    margin: 0 !important;
+}
+
+.context-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: darkolivegreen;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 0;
+    font-size: 10px;
+    font-weight: bold;
+    white-space: nowrap;
+
+}
+
+.context-tag span {
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: monospace;
+}
+
+.remove-context {
+    background: none;
+    border: none;
+    color: red;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: bold;
+    opacity: 1;
+}
+
+.remove-context:hover {
+    color: var(--nano-warning);
+}
+
+/* ============ CONTEXT SEARCH ============ */
+.context-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--nano-bg);
+    border: 1px solid var(--nano-border);
+    border-top: none;
+    border-radius: 0;
+    max-height: 80px;
+    overflow-y: auto;
+    z-index: 1000;
+    margin-top: 0;
+}
+
+.context-option {
+    padding: 3px 8px;
+    cursor: pointer;
+    font-size: 10px;
+    border-bottom: 1px solid var(--nano-border);
+    transition: all 0.1s;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--nano-text);
+    font-family: monospace;
+}
+
+.context-option:last-child {
+    border-bottom: none;
+}
+
+.context-option:hover {
+    background: yellow;
+    color: var(--nano-bg);
+}
+
+.context-option-empty {
+    padding: 6px 8px;
+    color: var(--nano-text-dim);
+    font-size: 10px;
+    text-align: center;
+}
+
+input#contextSearchInput {
+    padding: 3px 6px;
+    min-height: 24px;
+    background: var(--nano-bg);
+    color: var(--nano-text);
+    border: 1px solid var(--nano-border);
+    font-family: monospace;
+    font-size: 11px;
+}
+
+/* ============ PDF VIEWER ============ */
+#pdfViewer {
+    width: 100%;
+    height: 100%;
+    background: var(--nano-bg);
+}
+
+/* ============ LOADER ============ */
+#loadingOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    border: 2px solid var(--nano-border);
+}
+
+#loadingOverlay.active {
+    display: flex;
+}
+
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--nano-text-dim);
+    border-top: 2px solid var(--nano-text);
+    border-right: 2px solid var(--nano-text);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loader-text {
+    color: var(--nano-text);
+    font-size: 13px;
+    font-weight: bold;
+    font-family: monospace;
+    letter-spacing: 1px;
+}
+
+/* ============ SCROLLBAR ============ */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--nano-bg);
+    border-left: 1px solid var(--nano-border);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--nano-text-dim);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--nano-highlight);
+}
+
+/* ============ DOCUMENT VIEWERS ============ */
+
+#pdfViewer {
+    width: 100%;
+    height: 100%;
+    background: var(--nano-bg);
+}
+
+#documentViewer {
+    width: 100%;
+    height: 100%;
+    background: var(--nano-bg);
+    overflow: auto;
+}
+
+.document-viewer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--nano-bg);
+}
+
+.document-header {
+    background: var(--nano-border);
+    border-bottom: 1px solid var(--nano-highlight);
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    font-size: 12px;
+    color: var(--nano-text);
+    font-weight: bold;
+    border-left: 3px solid var(--nano-highlight);
+}
+
+.doc-icon {
+    font-size: 18px;
+}
+
+.doc-name {
+    flex: 1;
+    font-family: monospace;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--nano-highlight);
+}
+
+.doc-meta {
+    font-size: 10px;
+    background: var(--nano-highlight);
+    color: var(--nano-bg);
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-weight: bold;
+}
+
+.doc-warning {
+    font-size: 11px;
+    background: var(--nano-warning);
+    color: var(--nano-bg);
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-weight: bold;
+    animation: pulse-warning 1.5s infinite;
+}
+
+@keyframes pulse-warning {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.document-content {
+    flex: 1;
+    padding: 16px;
+    background: var(--nano-bg);
+    color: var(--nano-success);
+    font-size: 11px;
+    line-height: 1.4;
+    font-family: monospace;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: auto;
+    border: none;
+    margin: 0;
+}
+
+.document-content::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.document-content::-webkit-scrollbar-track {
+    background: var(--nano-bg);
+}
+
+.document-content::-webkit-scrollbar-thumb {
+    background: var(--nano-text-dim);
+    border-radius: 4px;
+}
+
+.document-content::-webkit-scrollbar-thumb:hover {
+    background: var(--nano-highlight);
+}
+
+/* ============ DOCX PREVIEW RENDERING ============ */
+
+.docx-preview-container {
+    flex: 1;
+    overflow: auto;
+    padding: 16px;
+    background: var(--nano-bg);
+}
+
+.docx-rendered {
+    background: white;
+    color: #000;
+    padding: 20px;
+    line-height: 1.6;
+    font-family: 'Calibri', 'Arial', sans-serif;
+    border: 1px solid var(--nano-border);
+    max-width: 900px;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.docx-rendered h1,
+.docx-rendered h2,
+.docx-rendered h3,
+.docx-rendered h4,
+.docx-rendered h5,
+.docx-rendered h6 {
+    margin-top: 10px;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.docx-rendered p {
+    margin-bottom: 8px;
+}
+
+.docx-rendered table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.docx-rendered table td,
+.docx-rendered table th {
+    border: 1px solid #ccc;
+    padding: 8px;
+}
+
+.docx-rendered table th {
+    background: #f5f5f5;
+    font-weight: bold;
+}
+
+.docx-rendered img {
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loader-text {
+    color: var(--nano-text);
+    font-size: 13px;
+    font-weight: bold;
+    font-family: monospace;
+    letter-spacing: 1px;
+}
+
+/* ============ SCROLLBAR ============ */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--nano-bg);
+    border-left: 1px solid var(--nano-border);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--nano-text-dim);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--nano-highlight);
+}
+
+/* ============ DOCUMENT VIEWERS ============ */
+
+#pdfViewer {
+    width: 100%;
+    height: 100%;
+    background: var(--nano-bg);
+}
+
+#documentViewer {
+    width: 100%;
+    height: 100%;
+    background: var(--nano-bg);
+    overflow: auto;
+}
+
+.document-viewer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--nano-bg);
+}
+
+.document-header {
+    background: var(--nano-border);
+    border-bottom: 1px solid var(--nano-highlight);
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    font-size: 12px;
+    color: var(--nano-text);
+    font-weight: bold;
+    border-left: 3px solid var(--nano-highlight);
+}
+
+.doc-icon {
+    font-size: 18px;
+}
+
+.doc-name {
+    flex: 1;
+    font-family: monospace;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: white;
+}
+
+.doc-meta {
+    font-size: 10px;
+    background: white;
+    color: var(--nano-bg);
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-weight: bold;
+}
+
+.doc-warning {
+    font-size: 11px;
+    background: var(--nano-warning);
+    color: var(--nano-bg);
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-weight: bold;
+    animation: pulse-warning 1.5s infinite;
+}
+
+@keyframes pulse-warning {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.document-content {
+    flex: 1;
+    padding: 16px;
+    background: var(--nano-bg);
+    color: var(--nano-success);
+    font-size: 11px;
+    line-height: 1.4;
+    font-family: monospace;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: auto;
+    border: none;
+    margin: 0;
+}
+
+.document-content::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.document-content::-webkit-scrollbar-track {
+    background: var(--nano-bg);
+}
+
+.document-content::-webkit-scrollbar-thumb {
+    background: var(--nano-text-dim);
+    border-radius: 4px;
+}
+
+.document-content::-webkit-scrollbar-thumb:hover {
+    background: var(--nano-highlight);
+}
+
+/* ============ DOCX PREVIEW RENDERING ============ */
+
+.docx-preview-container {
+    flex: 1;
+    overflow: auto;
+    padding: 16px;
+    background: var(--nano-bg);
+}
+
+.docx-rendered {
+    background: white;
+    color: #000;
+    padding: 20px;
+    line-height: 1.6;
+    font-family: 'Calibri', 'Arial', sans-serif;
+    border: 1px solid var(--nano-border);
+    max-width: 900px;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.docx-rendered h1,
+.docx-rendered h2,
+.docx-rendered h3,
+.docx-rendered h4,
+.docx-rendered h5,
+.docx-rendered h6 {
+    margin-top: 10px;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.docx-rendered p {
+    margin-bottom: 8px;
+}
+
+.docx-rendered table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.docx-rendered table td,
+.docx-rendered table th {
+    border: 1px solid #ccc;
+    padding: 8px;
+}
+
+.docx-rendered table th {
+    background: #f5f5f5;
+    font-weight: bold;
+}
+
+.docx-rendered img {
+    max-width: 100%;
+    height: auto;
+    margin: 10px 0;
+}
+
+.CodeMirror-activeline-background {
+    background: rgba(255, 255, 0, 0.08) !important;
+    border-left: 2px solid rgba(255, 255, 0, 0.4);
+}
+
+.CodeMirror-focused .CodeMirror-activeline-background {
+    background: rgba(255, 255, 0, 0.12) !important;
+    border-left: 2px solid yellow;
+}
+
+.CodeMirror-cursor {
+    border-left: 2px solid var(--nano-text) !important;
+    border-left-width: 2px;
+    /* Adjust this value for desired thickness */
+}
